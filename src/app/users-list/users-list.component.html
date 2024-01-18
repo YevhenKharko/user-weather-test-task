@@ -1,0 +1,19 @@
+<div *ngIf="isLoading; else userCards">
+  <div class="wrapper">
+    <div class="loader">
+      <span class="loader_element"> </span>
+    </div>
+  </div>
+</div>
+
+<ng-template #userCards>
+  <section class="notification">
+    <div>
+      <div class="columns is-multiline">
+        <div class="column is-4 card" *ngFor="let user of users; let i = index">
+          <app-user-card [user]="user" [savedUsers]="savedUsers"></app-user-card>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-template>

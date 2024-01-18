@@ -1,0 +1,50 @@
+<div class="card">
+  <div class="card-image">
+    <figure class="image is-4by3">
+      <img [src]="user?.picture?.large" alt="User Image">
+    </figure>
+  </div>
+
+  <div class="card-content has-text-centered">
+    <p class="title is-4">{{ user?.name?.title}} {{user?.name?.first}} {{user?.name?.last}}</p>
+
+    <p class="subtitle is-6" *ngIf="user && user.gender !== undefined"
+      [ngClass]="{'has-text-info': user.gender === 'male', 'has-text-danger': user.gender === 'female'}">
+      {{ user.gender === 'male' ? 'Male' : 'Female' }}
+    </p>
+
+    <div class="is-flex my-5 is-flex-wrap is-justify-content-space-around">
+      <button *ngIf="isCurrentUserInList()" class="button is-danger" (click)="onClickDelete()">Delete user</button>
+
+      <button *ngIf="!isCurrentUserInList()" class="button is-success" (click)="onClickSave()">Save info</button>
+    </div>
+
+    <p class="title is-4">{{ user?.location?.city }}</p>
+    <div class="is-flex is-justify-content-space-around" *ngIf="user?.weather">
+      <span class="subtitle is-6">Min: <span class="has-text-weight-bold">{{ user?.minTemperature }}</span>
+        <sup>o</sup>C </span>
+
+      <span class="subtitle is-6">Current: <span class="has-text-weight-bold">{{
+          user?.weather?.current_weather?.temperature }}</span> <sup>o</sup>C
+      </span>
+      <span class="subtitle is-6">Max: <span class="has-text-weight-bold">{{ user?.maxTemperature }}</span>
+        <sup>o</sup>C </span>
+
+      <div class="weather-info">
+        <span class="weather-icon" *ngIf="user?.weather">
+          {{ getWeatherInfo(user?.weather?.current_weather?.weathercode || 0).icon }}
+        </span>
+
+        <span class="has-text-weight-bold">
+          {{ getWeatherInfo(user?.weather?.current_weather?.weathercode || 0).description }}
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="card-footer">
+    <a href="mailto:{{ user?.email }}" class="card-footer-item is-link">{{ user?.email }}</a>
+  </footer>
+
+</div>

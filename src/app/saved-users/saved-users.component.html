@@ -1,0 +1,5 @@
+<div class="columns is-multiline">
+  <div class="column is-4 card" *ngFor="let user of savedUsers; let i = index">
+    <app-user-card [user]="user" [savedUsers]="savedUsers" ></app-user-card>
+  </div>
+</div>
