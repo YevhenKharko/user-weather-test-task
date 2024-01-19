@@ -14,9 +14,23 @@
     </p>
 
     <div class="is-flex my-5 is-flex-wrap is-justify-content-space-around">
-      <button *ngIf="isCurrentUserInList()" class="button is-danger" (click)="onClickDelete()">Delete user</button>
+      <button
+        *ngIf="isCurrentUserInList() && isSavedUsersRoute"
+        class="button is-success"
+        (click)="onClickDelete()"
+        [disabled]="!isCurrentUserInList()">
+      Show hourly weather
+    </button>
 
-      <button *ngIf="!isCurrentUserInList()" class="button is-success" (click)="onClickSave()">Save info</button>
+      <button *ngIf="isCurrentUserInList() && isSavedUsersRoute" class="button is-danger" (click)="onClickDelete()"
+        [disabled]="!isCurrentUserInList()">
+        Delete user
+      </button>
+
+      <button *ngIf="!isSavedUsersRoute" class="button is-success" (click)="onClickSave()"
+        [disabled]="isCurrentUserInList()">
+        Save info
+      </button>
     </div>
 
     <p class="title is-4">{{ user?.location?.city }}</p>

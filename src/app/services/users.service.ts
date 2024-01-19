@@ -12,7 +12,7 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   getData(): Observable<any[]> {
-    return this.http.get<any>(this.usersApi + '?results=20')
+    return this.http.get<any>(this.usersApi)
       .pipe(map(response => response.results));
   }
 }

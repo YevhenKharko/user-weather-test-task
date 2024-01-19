@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnChanges, DoCheck } from '@angular/core';
 import { User } from '../../types/types';
 
 @Component({
@@ -6,14 +6,24 @@ import { User } from '../../types/types';
   templateUrl: './saved-users.component.html',
   styleUrls: ['./saved-users.component.scss'],
 })
-export class SavedUsersComponent {
-  savedUsers: User[] = JSON.parse(localStorage.getItem('savedUsers') || '[]') as User[];
+export class SavedUsersComponent implements DoCheck {
+  @Input() savedUsers: User[] = [];
 
-  onDelete(index: number): void {
-    this.savedUsers.splice(index, 1);
-    localStorage.setItem('savedUsers', JSON.stringify(this.savedUsers));
+  @Output() userDeleted = new EventEmitter<number>();
+
+  ngDoCheck(): void {
+    const savedUsersFromLocalStorage = JSON.parse(localStorage.getItem('savedUsers') || '[]') as User[];
+    if (this.savedUsers !== savedUsersFromLocalStorage) {
+      this.savedUsers = savedUsersFromLocalStorage;
+    }
   }
 
-}
+  onDelete(index: number): void {
+    this.userDeleted.emit(index);
+  }
 
-console.log('savedUsers');
+  onClear(): void {
+    localStorage.clear();
+    this.savedUsers = [];
+  }
+}

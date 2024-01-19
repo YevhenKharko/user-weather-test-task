@@ -7,9 +7,6 @@ import { AppNavbarModule } from './app-navbar/app-navbar.module';
 import { SavedUsersModule } from './saved-users/saved-users.module';
 import { WeatherService } from '../services/weather.service';
 import { UsersService } from '../services/users.service';
-import { weatherInfoMap } from '../data/weatherInfoMap';
-import { User, Weather, WeatherInfo } from '../types';
-import { forkJoin } from 'rxjs';
 import { UsersListModule } from './users-list/users-list.module';
 
 @Component({
@@ -29,4 +26,5 @@ import { UsersListModule } from './users-list/users-list.module';
   providers: [UsersService, WeatherService],
 })
 export class AppComponent {
+  // GAP BETWEEN CARDS AND BORDER
 }
