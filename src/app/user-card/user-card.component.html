@@ -1,4 +1,21 @@
 <div class="card">
+  <!-- <div class="modal show">
+    <div class="modal-content">
+      <span class="close" (click)="toggleModal()">&times;</span>
+      <h1>Hourly Weather</h1>
+
+      <ng-container *ngIf="isLoading; else dataContent">
+        <p>Loading...</p>
+      </ng-container>
+
+      <ng-template #dataContent>
+        <ul>
+          <li *ngFor="let t of time; let i = index">{{ t }} - {{ temperature[i] }}°C</li>
+        </ul>
+      </ng-template>
+    </div>
+  </div> -->
+
   <div class="card-image">
     <figure class="image is-4by3">
       <img [src]="user?.picture?.large" alt="User Image">
@@ -14,15 +31,11 @@
     </p>
 
     <div class="is-flex my-5 is-flex-wrap is-justify-content-space-around">
-      <button
-        *ngIf="isCurrentUserInList() && isSavedUsersRoute"
-        class="button is-success"
-        (click)="onClickDelete()"
-        [disabled]="!isCurrentUserInList()">
-      Show hourly weather
-    </button>
+      <!-- <button *ngIf="isSavedUsersRoute && isModalOpened" class="button is-success mx-3" (click)="toggleModal()">
+        Show hourly weather
+      </button> -->
 
-      <button *ngIf="isCurrentUserInList() && isSavedUsersRoute" class="button is-danger" (click)="onClickDelete()"
+      <button *ngIf="isCurrentUserInList() && isSavedUsersRoute" class="button is-danger mx-3" (click)="onClickDelete()"
         [disabled]="!isCurrentUserInList()">
         Delete user
       </button>
@@ -45,12 +58,12 @@
         <sup>o</sup>C </span>
 
       <div class="weather-info">
-        <span class="weather-icon" *ngIf="user?.weather">
-          {{ getWeatherInfo(user?.weather?.current_weather?.weathercode || 0).icon }}
-        </span>
-
         <span class="has-text-weight-bold">
           {{ getWeatherInfo(user?.weather?.current_weather?.weathercode || 0).description }}
+        </span>
+
+        <span class="weather-icon" *ngIf="user?.weather">
+          {{ getWeatherInfo(user?.weather?.current_weather?.weathercode || 0).icon }}
         </span>
       </div>
     </div>

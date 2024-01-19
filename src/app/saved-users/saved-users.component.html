@@ -5,10 +5,9 @@
   >
   Clear all users
 </button>
-<div class="columns is-multiline">
-
-  <div class="column is-4 card" *ngFor="let user of savedUsers; let i = index">
+<h2 *ngIf="!savedUsers.length" class="is-size-5 is-flex is-justify-content-center">There are no saved users here...Yet!</h2>
+<div class="columns is-multiline is-flex is-justify-content-center">
+  <div class="column is-3 card" *ngFor="let user of savedUsers; let i = index">
     <app-user-card [user]="user" [savedUsers]="savedUsers"></app-user-card>
   </div>
-
 </div>

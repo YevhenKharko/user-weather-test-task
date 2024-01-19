@@ -44,3 +44,8 @@ export type WeatherInfo = {
   icon: string;
   description: string;
 };
+
+export type Modal = {
+  time: string[],
+  temperature: number[],
+}
